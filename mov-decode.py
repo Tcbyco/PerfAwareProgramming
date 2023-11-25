@@ -1,3 +1,6 @@
+import sys
+import struct
+import numpy as np
 '''
 Decodes an intel 8086 binary register to register MOV instruction and outputs the assembly instruction
 
@@ -37,6 +40,22 @@ def decodeReg(reg, fullWidth):
       print('DI') if fullWidth else print('BH')
     case _:
       print('unknown')
+# read in the two bytes and store them separately
+twoBytes = np.dtype( 'u1' )
+with open(sys.argv[1], 'rb') as binary:
+    #instr = binary.read()
+    #(first, second) = struct.unpack("@cc", instr) 
+    data = np.fromfile(binary, dtype=twoBytes)
+    
+    print('first and second are:')
+    print(data)
+    #print(second)
 
-decodeReg(b'000')
-decodeReg(b'111')
+
+# check the instruction
+
+# get d and w
+
+# get mod (for now mod should always be 11)
+
+# decode reg and r/m
